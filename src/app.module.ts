@@ -7,6 +7,7 @@ import { envSchema } from './env-config/env-config.schema';
 import { ProductsModule } from './products/products.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { EnvConfigService } from './env-config/env-config.service';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { EnvConfigService } from './env-config/env-config.service';
       },
     }),
     ProductsModule,
+    OrdersModule,
   ],
   controllers: [],
   providers: [],
