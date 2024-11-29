@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { Order } from './entities/order.entity';
 
 import { CreateOrderDto } from './dto/create-order.dto';
+import { UpdateOrderDto } from './dto/update-order.dto';
 
 @Injectable()
 export class OrdersRepository {
@@ -14,5 +15,9 @@ export class OrdersRepository {
 
   async create(createOrderDto: CreateOrderDto) {
     return this.orderModel.create(createOrderDto);
+  }
+
+  async update(id: string, updateOrderDto: UpdateOrderDto) {
+    return this.orderModel.findByIdAndUpdate(id, updateOrderDto, { new: true });
   }
 }

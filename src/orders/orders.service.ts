@@ -39,8 +39,8 @@ export class OrdersService {
     return order;
   }
 
-  update(id: number, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
+  async update(id: string, updateOrderDto: UpdateOrderDto) {
+    return this.ordersRepository.update(id, updateOrderDto);
   }
 
   private extractProductIds(items: CreateOrderItemBodyDto[]): string[] {
