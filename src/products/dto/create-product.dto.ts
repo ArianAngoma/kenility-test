@@ -1,5 +1,5 @@
 import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 
 export class CreateProductDto {
   @IsString()
@@ -7,6 +7,7 @@ export class CreateProductDto {
   readonly name: string;
 
   @IsString()
+  @Transform(({ value }) => value.toLowerCase())
   @IsNotEmpty()
   readonly sku: string;
 

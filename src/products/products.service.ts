@@ -2,12 +2,13 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
+import { isValidObjectId } from 'mongoose';
 
 import { ProductsRepository } from './products.repository';
 
 import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
 
 @Injectable()
 export class ProductsService {
@@ -24,20 +25,14 @@ export class ProductsService {
     }
   }
 
-  findAll() {
-    return `This action returns all products`;
-  }
+  async findOne(term: string) {
+    const product = isValidObjectId(term)
+      ? await this.productRepository.findOneById(term)
+      : await this.productRepository.findOneBySku(term.toLowerCase());
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
-  }
+    if (!product) throw new NotFoundException('Product not found');
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+    return product;
   }
 
   private handleExceptions(error: any) {

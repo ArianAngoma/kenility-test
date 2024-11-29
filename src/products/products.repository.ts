@@ -13,9 +13,17 @@ export class ProductsRepository {
   ) {}
 
   async create(createProductDto: CreateProductDto, pictureFilename: string) {
-    return await this.productModel.create({
+    return this.productModel.create({
       ...createProductDto,
       picture: pictureFilename,
     });
+  }
+
+  async findOneById(id: string) {
+    return this.productModel.findById(id);
+  }
+
+  async findOneBySku(sku: string) {
+    return this.productModel.findOne({ sku });
   }
 }
