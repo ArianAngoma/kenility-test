@@ -35,8 +35,19 @@ export class ProductsService {
     return product;
   }
 
+  async validateProductIds(ids: string[]) {
+    ids = Array.from(new Set(ids));
+
+    const products = await this.productRepository.findByIds(ids);
+
+    if (products.length !== ids.length) {
+      throw new NotFoundException('Some products were not found');
+    }
+
+    return products;
+  }
+
   private handleExceptions(error: any) {
-    console.log(error);
     if (error.code === 11000) {
       throw new BadRequestException({
         message: 'Product already exists',

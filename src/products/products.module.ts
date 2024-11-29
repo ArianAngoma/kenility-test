@@ -20,5 +20,6 @@ import { Product, ProductSchema } from './entities/product.entity';
       },
     ]),
   ],
+  exports: [ProductsService],
 })
 export class ProductsModule {}

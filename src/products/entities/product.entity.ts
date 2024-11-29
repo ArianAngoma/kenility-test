@@ -2,8 +2,7 @@ import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @Schema({
-  collection: 'product',
-  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+  timestamps: true,
 })
 export class Product extends Document {
   @Prop({ required: true })

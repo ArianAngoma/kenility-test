@@ -1,18 +1,17 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document, Schema as MongooseSchema } from 'mongoose';
 
-import { Product } from '../../products/entities/product.entity';
 import { Order } from '../../orders/entities/order.entity';
+import { Product } from '../../products/entities/product.entity';
 
-@Schema({ collection: 'order_item' })
+@Schema()
 export class OrderItem extends Document {
   @Prop({
-    type: Types.ObjectId,
+    type: MongooseSchema.Types.ObjectId,
     required: true,
-    alias: 'product_id',
-    ref: Product.name,
+    ref: 'Product',
   })
-  productId: Types.ObjectId;
+  productId: Product;
 
   @Prop({ type: Number, default: 1 })
   quantity: number;
@@ -20,8 +19,12 @@ export class OrderItem extends Document {
   @Prop({ type: Number, required: true })
   price: number;
 
-  @Prop({ type: Types.ObjectId, ref: Order.name, alias: 'order_id' })
-  orderId: Types.ObjectId;
+  @Prop({
+    type: MongooseSchema.Types.ObjectId,
+    required: true,
+    ref: 'Order',
+  })
+  orderId: Order;
 }
 
 export const OrderItemSchema = SchemaFactory.createForClass(OrderItem);

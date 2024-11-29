@@ -26,4 +26,8 @@ export class ProductsRepository {
   async findOneBySku(sku: string) {
     return this.productModel.findOne({ sku });
   }
+
+  async findByIds(ids: string[]) {
+    return this.productModel.find({ _id: { $in: ids } });
+  }
 }

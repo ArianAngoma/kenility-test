@@ -1,14 +1,15 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 
 import { EnvConfigModule } from './env-config/env-config.module';
+import { OrderItemsModule } from './order-items/order-items.module';
+import { ProductsModule } from './products/products.module';
+import { OrdersModule } from './orders/orders.module';
+
+import { EnvConfigService } from './env-config/env-config.service';
 
 import { envSchema } from './env-config/env-config.schema';
-import { ProductsModule } from './products/products.module';
-import { MongooseModule } from '@nestjs/mongoose';
-import { EnvConfigService } from './env-config/env-config.service';
-import { OrdersModule } from './orders/orders.module';
-import { OrderItemsModule } from './order-items/order-items.module';
 
 @Module({
   imports: [
