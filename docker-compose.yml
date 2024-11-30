@@ -11,3 +11,21 @@ services:
     volumes:
       - ./mongo-data:/data/db
 
+  kenility-api:
+    container_name: kenility-api
+    build:
+      context: ./
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - ./src:/usr/src/app/src
+    command: yarn start:dev
+    environment:
+      PORT: ${PORT}
+      MONGO_DB_USERNAME: ${MONGO_DB_USERNAME}
+      MONGO_DB_PASSWORD: ${MONGO_DB_PASSWORD}
+      MONGO_DB_NAME: ${MONGO_DB_NAME}
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      - kenility-db
+

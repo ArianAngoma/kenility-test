@@ -27,7 +27,7 @@ import { envSchema } from './env-config/env-config.schema';
         const dbName = envConfigService.getEnvVariable('MONGO_DB_NAME');
 
         return {
-          uri: `mongodb://${username}:${password}@localhost:27017`,
+          uri: `mongodb://${username}:${password}@kenility-db`,
           dbName,
         };
       },
