@@ -89,4 +89,30 @@ export class OrdersService {
       };
     });
   }
+
+  private async getTotalAmountLastMonth() {
+    const lastMonth = new Date();
+    lastMonth.setMonth(lastMonth.getMonth() - 1);
+
+    const orders = await this.ordersRepository.findByLastMonth(lastMonth);
+
+    return orders.reduce((acc, order) => acc + order.totalAmount, 0);
+  }
+
+  private async getOrderWithHighestTotalAmount() {
+    return await this.ordersRepository.findOrderWithHighestTotalAmount();
+  }
+
+  async getStatistics() {
+    const [totalAmountLastMonth, orderWithHighestTotalAmount] =
+      await Promise.all([
+        this.getTotalAmountLastMonth(),
+        this.getOrderWithHighestTotalAmount(),
+      ]);
+
+    return {
+      totalAmountLastMonth,
+      orderWithHighestTotalAmount,
+    };
+  }
 }

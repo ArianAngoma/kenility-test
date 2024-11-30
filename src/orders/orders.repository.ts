@@ -20,4 +20,16 @@ export class OrdersRepository {
   async update(id: string, updateOrderDto: UpdateOrderDto) {
     return this.orderModel.findByIdAndUpdate(id, updateOrderDto, { new: true });
   }
+
+  async findByLastMonth(lastMonth: Date) {
+    return this.orderModel.find({
+      createdAt: {
+        $gte: lastMonth,
+      },
+    });
+  }
+
+  async findOrderWithHighestTotalAmount() {
+    return this.orderModel.findOne().sort({ totalAmount: -1 }).exec();
+  }
 }

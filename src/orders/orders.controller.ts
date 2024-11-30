@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Patch, Param } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param, Get } from '@nestjs/common';
 
 import { OrdersService } from './orders.service';
 
@@ -31,5 +31,11 @@ export class OrdersController {
     @Body() updateOrderDto: UpdateOrderDto,
   ) {
     return this.ordersService.update(id, updateOrderDto);
+  }
+
+  @Get('statistics')
+  @Auth()
+  getStatistics() {
+    return this.ordersService.getStatistics();
   }
 }
