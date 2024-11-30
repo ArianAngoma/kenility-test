@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Schema as MongooseSchema } from 'mongoose';
+
+import { User } from '../../auth/entities/user.entity';
 
 import { OrderStatus } from '../enums/order-status.enum';
 
@@ -15,6 +17,13 @@ export class Order extends Document {
 
   @Prop({ type: String, enum: OrderStatus, default: OrderStatus.PENDING })
   status: OrderStatus;
+
+  @Prop({
+    type: MongooseSchema.Types.ObjectId,
+    required: true,
+    ref: 'User',
+  })
+  userId: User;
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order);

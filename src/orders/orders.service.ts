@@ -19,7 +19,7 @@ export class OrdersService {
     private readonly orderItemsService: OrderItemsService,
   ) {}
 
-  async create({ items }: CreateOrderBodyDto) {
+  async create({ items }: CreateOrderBodyDto, userId: string) {
     const productIds = this.extractProductIds(items);
     const products = await this.productsService.validateProductIds(productIds);
 
@@ -30,6 +30,7 @@ export class OrdersService {
     const order = await this.ordersRepository.create({
       totalAmount,
       totalItems,
+      userId,
     });
 
     await this.orderItemsService.createOrderItems(
@@ -40,7 +41,7 @@ export class OrdersService {
   }
 
   async update(id: string, updateOrderDto: UpdateOrderDto) {
-    return this.ordersRepository.update(id, updateOrderDto);
+    return await this.ordersRepository.update(id, updateOrderDto);
   }
 
   private extractProductIds(items: CreateOrderItemBodyDto[]): string[] {

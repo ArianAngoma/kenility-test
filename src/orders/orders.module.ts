@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { ProductsModule } from '../products/products.module';
 import { OrderItemsModule } from '../order-items/order-items.module';
+import { AuthModule } from '../auth/auth.module';
 
 import { OrdersController } from './orders.controller';
 
@@ -16,6 +17,7 @@ import { Order, OrderSchema } from './entities/order.entity';
   imports: [
     ProductsModule,
     OrderItemsModule,
+    AuthModule,
     MongooseModule.forFeature([
       {
         name: Order.name,

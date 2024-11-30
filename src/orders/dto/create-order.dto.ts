@@ -1,4 +1,4 @@
-import { IsInt } from 'class-validator';
+import { IsInt, IsMongoId } from 'class-validator';
 
 export class CreateOrderDto {
   @IsInt()
@@ -6,4 +6,7 @@ export class CreateOrderDto {
 
   @IsInt()
   totalItems: number;
+
+  @IsMongoId()
+  userId: string;
 }
