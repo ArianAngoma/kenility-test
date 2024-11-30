@@ -6,6 +6,8 @@ export const envSchema = z.object({
   MONGO_DB_USERNAME: z.string(),
   MONGO_DB_PASSWORD: z.string(),
   MONGO_DB_NAME: z.string(),
+
+  JWT_SECRET: z.string(),
 });
 
 export type Env = z.infer<typeof envSchema>;

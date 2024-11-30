@@ -6,6 +6,7 @@ import { EnvConfigModule } from './env-config/env-config.module';
 import { OrderItemsModule } from './order-items/order-items.module';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
+import { AuthModule } from './auth/auth.module';
 
 import { EnvConfigService } from './env-config/env-config.service';
 
@@ -34,6 +35,7 @@ import { envSchema } from './env-config/env-config.schema';
     ProductsModule,
     OrdersModule,
     OrderItemsModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
